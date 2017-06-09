@@ -1,3 +1,52 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-primary" type="reset">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label for="name">Name</label>
+          <input class="form-control" id="name" type="text" name="name" formControlName="name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label for="imgPath">Image URL</label>
+          <input class="form-control" id="imgPath" type="text" name="imgPath" formControlName="imgPath">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="" class="img-responsive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" rows="6" name="description" formControlName="description">
+          </textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group" formArrayName="ingredients">
+          <div class="row" *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls ; let i = index" [formGroupName]="i">
+            <div class="col-sm-8 form-group">
+              <input class="form-control" type="text" formControlName="name">
+            </div>
+            <div class="col-sm-2 form-group">
+              <input class="form-control" type="number" pattern="^[1-9]+[0-9]*$" formControlName="amount">
+            </div>
+            <div class="col-sm-2 form-group">
+              <button class="btn btn-danger">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
