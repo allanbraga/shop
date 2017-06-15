@@ -16,6 +16,12 @@ import {ShoppingService} from "./shopping-list/service/shopping.service";
 import {AppRoutingModule} from "./app-routing.module";
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import {RecipeService} from "./recipes/service/recipe.service";
+import {DataStorageService} from "./shared/data-storage.service";
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import {AuthService} from "./auth/auth.service";
+import {AuthGuardService} from "./auth/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +35,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [ShoppingService],
+  providers: [ShoppingService,RecipeService,DataStorageService,AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,14 +2,12 @@ import {Recipe} from "../recipe.model";
 import {Injectable} from "@angular/core";
 import {Ingredient} from "../../shared/ingredient.model";
 import {ShoppingService} from "../../shopping-list/service/shopping.service";
+import {Subject} from "rxjs/Rx";
 @Injectable()
 export class RecipeService{
-  private recipes: Recipe[] = [
-    new Recipe('A Test Recipe','This is a simply recipe test','http://www.seriouseats.com/recipes/assets_c/2016/05/20160503-fava-carrot-ricotta-salad-recipe-1-thumb-1500xauto-431710.jpg',[new Ingredient('Meat',1), new Ingredient('Banana',5)]),
-    new Recipe('A Test Recipe 2','This is a simply recipe test','http://www.seriouseats.com/recipes/assets_c/2016/05/20160503-fava-carrot-ricotta-salad-recipe-1-thumb-1500xauto-431710.jpg',[new Ingredient('Salada',1), new Ingredient('Pepino',5)])
-  ];
+  recipesChanged = new Subject<Recipe[]>();
 
-
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingService:ShoppingService){
 
@@ -25,5 +23,25 @@ export class RecipeService{
 
   getRecipe(id:number){
     return this.recipes.slice()[id];
+  }
+
+  addRecipe(recipe:Recipe){
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index:number , newRecipe:Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index:number){
+    this.recipes.splice(index,1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  setRecipes(recipes:Recipe[]){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
