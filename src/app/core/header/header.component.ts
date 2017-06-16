@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStorageService} from "../shared/data-storage.service";
-import {AuthService} from "../auth/auth.service";
+import {DataStorageService} from "../../shared/data-storage.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import {AuthService} from "../auth/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dataStorageService:DataStorageService , private authService:AuthService) { }
+  constructor(private dataStorageService:DataStorageService , public authService:AuthService) { }
 
   ngOnInit() {
 
@@ -29,5 +29,5 @@ export class HeaderComponent implements OnInit {
   onLogOut(){
     this.authService.logOut();
   }
-  
+
 }
